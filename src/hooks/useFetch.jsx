@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 
 function useFetch(initialURL) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [url, setUrl] = useState(initialURL);
   const [error, setError] = useState(null);
