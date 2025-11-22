@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 
 function Header() {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
+  const [darkMode,setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
+  const handleDarkModeToggle = () => setDarkMode(!darkMode);
+
+  useEffect(() => {
+    localStorage.setItem("darkMode",JSON.stringify(darkMode));
+    if(darkMode) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
   return (
-    <nav className="bg-slate-900 fixed w-full z-20 top-0 start-0 border-b border-default sticky">
+    <nav className="bg-slate-900 fixed w-full z-20 top-0 start-0 border-default sticky">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a
           href="https://flowbite.com/"
@@ -51,11 +63,12 @@ function Header() {
             id="theme-toggle"
             data-tooltip-target="tooltip-toggle"
             type="button"
-            class="inline-flex hover:text-heading items-center justify-center text-body w-10 h-10 hover:bg-neutral-secondary-soft focus:outline-none focus:ring-2 focus:ring-neutral-tertiary rounded-xl text-sm p-2.5 me-3 hover:bg-primary-800 cursor-pointer hover-text-white"
+            className="inline-flex hover:text-heading items-center justify-center text-body w-10 h-10 hover:bg-neutral-secondary-soft focus:outline-none focus:ring-2 focus:ring-neutral-tertiary rounded-xl text-sm p-2.5 me-3 hover:bg-primary-800 cursor-pointer hover-text-white"
+            onClick={handleDarkModeToggle}
           >
             <svg
               id="theme-toggle-dark-icon"
-              class="hidden w-5 h-5"
+              className={`${!darkMode ? '' : "hidden"} w-5 h-5`}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -65,15 +78,15 @@ function Header() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"
               ></path>
             </svg>
             <svg
               id="theme-toggle-light-icon"
-              class="w-5 h-5"
+              className={`${darkMode ? '' : "hidden"} w-5 h-5`}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -83,13 +96,13 @@ function Header() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
               ></path>
             </svg>
-            <span class="sr-only">Toggle dark mode</span>
+            <span className="sr-only ">Toggle dark mode</span>
           </button>
           <div className="relative hidden md:block">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
