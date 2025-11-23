@@ -9,6 +9,11 @@ function Header() {
   const [darkMode,setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
   const handleDarkModeToggle = () => setDarkMode(!darkMode);
 
+  const activeMenuItemClasses = "block py-2 px-3 focus:text-primary-950 focus:outline-none rounded md:p-0 hover:text-primary-950 text-primary-800";
+  const inActiveMenuItemClasses = "block py-2 px-3 text-white focus:text-primary-800 focus:outline-none rounded md:p-0 hover:text-primary-800";
+
+
+
   useEffect(() => {
     localStorage.setItem("darkMode",JSON.stringify(darkMode));
     if(darkMode) {
@@ -193,9 +198,8 @@ function Header() {
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
             <li>
               <NavLink
-                href="/"
-                className="block py-2 px-3 text-white rounded md:p-0 hover:text-primary-800
-                focus:outline-none"
+                to="/"
+                className={({ isActive }) => isActive ? activeMenuItemClasses : inActiveMenuItemClasses}
                 aria-current="page"
               >
                 Home
@@ -204,17 +208,15 @@ function Header() {
             <li>
               <NavLink
                 to="/popular"
-                className="block py-2 px-3 text-white rounded md:p-0 hover:text-primary-800
-                focus:outline-none"
+                className={({ isActive }) => isActive ? activeMenuItemClasses : inActiveMenuItemClasses}
               >
                 Popular
               </NavLink>
             </li>
             <li>
               <NavLink
-                href="/top_rated"
-                className="block py-2 px-3 text-white rounded md:p-0 hover:text-primary-800
-                focus:outline-none"
+                to="/top_rated"
+                className={({ isActive }) => isActive ? activeMenuItemClasses : inActiveMenuItemClasses}
               >
                 Top Rated
               </NavLink>
@@ -222,8 +224,7 @@ function Header() {
             <li>
               <NavLink
                 to="/upcoming"
-                className="block py-2 px-3 text-white rounded md:p-0 hover:text-primary-800
-                focus:outline-none"
+                className={({ isActive }) => isActive ? activeMenuItemClasses : inActiveMenuItemClasses}
               >
                 Upcoming
               </NavLink>
