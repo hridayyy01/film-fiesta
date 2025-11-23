@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 function Header() {
@@ -191,41 +192,41 @@ function Header() {
           </div>
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
             <li>
-              <a
-                href="#"
+              <NavLink
+                href="/"
                 className="block py-2 px-3 text-white rounded md:p-0 hover:text-primary-800
                 focus:outline-none"
                 aria-current="page"
               >
                 Home
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href="#"
+              <NavLink
+                to="/popular"
                 className="block py-2 px-3 text-white rounded md:p-0 hover:text-primary-800
                 focus:outline-none"
               >
                 Popular
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href="#"
+              <NavLink
+                href="/top_rated"
                 className="block py-2 px-3 text-white rounded md:p-0 hover:text-primary-800
                 focus:outline-none"
               >
                 Top Rated
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href="#"
+              <NavLink
+                to="/upcoming"
                 className="block py-2 px-3 text-white rounded md:p-0 hover:text-primary-800
                 focus:outline-none"
               >
                 Upcoming
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
