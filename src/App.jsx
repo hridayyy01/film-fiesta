@@ -1,6 +1,7 @@
 import { Footer, Header } from "./components"
 import { AppRoutes } from "./routes"
 import './App.css'
+// import Skeleton from "../components/Skeleton";
 
 function App() {
   return (

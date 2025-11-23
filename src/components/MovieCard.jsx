@@ -40,7 +40,7 @@ function MovieCard({ movie }) {
               stroke="currentColor"
               strokeLinecap="round"
               strokeLinejoin="round"
-              stroke-width="2"
+              strokeWidth="2"
               d="M19 12H5m14 0-4 4m4-4-4-4"
             />
           </svg>
