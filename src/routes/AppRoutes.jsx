@@ -21,6 +21,7 @@ function AppRoutes() {
         path="/top_rated"
         element={<MoviesPage key="top_rated" partUrl="top_rated" />}
       />
+      <Route path="/search" element={<MoviesPage key="search" />} />
       <Route path="/movies/:id" element={<MovieDetailPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>

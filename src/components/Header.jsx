@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 function Header() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("q") || "");
 
   const [darkMode,setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
   const handleDarkModeToggle = () => setDarkMode(!darkMode);
@@ -22,6 +25,16 @@ function Header() {
         document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  function handleSearchSubmit(event) {
+    event.preventDefault();
+    const trimmedSearchTerm = searchTerm.trim();
+
+    if (trimmedSearchTerm) {
+      navigate(`/search?q=${encodeURIComponent(trimmedSearchTerm)}`);
+      setShow(false);
+    }
+  }
 
   return (
     <nav className="bg-slate-900 fixed w-full z-20 top-0 start-0 border-default sticky">
@@ -62,8 +75,8 @@ function Header() {
             </svg>
             <span className="sr-only">Search</span>
           </button>
-          <label htmlFor="input-group-1" className="sr-only">
-            Your Email
+          <label htmlFor="desktop-search" className="sr-only">
+            Search movies
           </label>
           <button
             id="theme-toggle"
@@ -110,7 +123,7 @@ function Header() {
             </svg>
             <span className="sr-only ">Toggle dark mode</span>
           </button>
-          <div className="relative hidden md:block">
+          <form className="relative hidden md:block" onSubmit={handleSearchSubmit}>
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
                 className="w-4 h-4 text-body"
@@ -131,11 +144,13 @@ function Header() {
             </div>
             <input
               type="text"
-              id="input-group-1"
+              id="desktop-search"
               className="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-2.5 py-2 shadow-xs placeholder:text-body"
               placeholder="Search"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
             />
-          </div>
+          </form>
           <button
             data-collapse-toggle="navbar-search"
             type="button"
@@ -169,7 +184,7 @@ function Header() {
           } w-full md:flex md:w-auto md:order-1`}
           id="navbar-search"
         >
-          <div className="relative mt-3 md:hidden">
+          <form className="relative mt-3 md:hidden" onSubmit={handleSearchSubmit}>
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
                 className="w-4 h-4 text-body"
@@ -190,11 +205,13 @@ function Header() {
             </div>
             <input
               type="text"
-              id="input-group-1"
+              id="mobile-search"
               className="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-2.5 py-2 shadow-xs placeholder:text-body"
               placeholder="Search"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
             />
-          </div>
+          </form>
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
             <li>
               <NavLink
