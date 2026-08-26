@@ -28,7 +28,19 @@ function Header() {
 
   function handleSearchSubmit(event) {
     event.preventDefault();
-    const trimmedSearchTerm = searchTerm.trim();
+    const formData = new FormData(event.currentTarget);
+    submitSearch(formData.get("search")?.toString());
+  }
+
+  function handleSearchKeyDown(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      submitSearch(event.currentTarget.value);
+    }
+  }
+
+  function submitSearch(value) {
+    const trimmedSearchTerm = value?.trim();
 
     if (trimmedSearchTerm) {
       navigate(`/search?q=${encodeURIComponent(trimmedSearchTerm)}`);
@@ -145,10 +157,12 @@ function Header() {
             <input
               type="text"
               id="desktop-search"
+              name="search"
               className="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-2.5 py-2 shadow-xs placeholder:text-body"
               placeholder="Search"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
+              onKeyDown={handleSearchKeyDown}
             />
           </form>
           <button
@@ -206,10 +220,12 @@ function Header() {
             <input
               type="text"
               id="mobile-search"
+              name="search"
               className="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-2.5 py-2 shadow-xs placeholder:text-body"
               placeholder="Search"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
+              onKeyDown={handleSearchKeyDown}
             />
           </form>
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
