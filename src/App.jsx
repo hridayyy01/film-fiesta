@@ -5,13 +5,13 @@ import './App.css'
 
 function App() {
   return (
-    <>
+    <div className="flex min-h-screen flex-col dark:bg-slate-700">
       <Header />
-      <main className="dark:bg-slate-700">
+      <main className="min-h-0 flex-1 pb-20 dark:bg-slate-700">
         <AppRoutes />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

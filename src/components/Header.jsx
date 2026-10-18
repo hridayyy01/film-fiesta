@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
+  const query = searchParams.get("q") || "";
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
-  const [searchTerm, setSearchTerm] = useState(searchParams.get("q") || "");
+  const [searchTerm, setSearchTerm] = useState(query);
 
   const [darkMode,setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
   const handleDarkModeToggle = () => setDarkMode(!darkMode);
@@ -25,6 +27,10 @@ function Header() {
         document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    setSearchTerm(location.pathname === "/search" ? query : "");
+  }, [location.pathname, query]);
 
   function handleSearchSubmit(event) {
     event.preventDefault();
@@ -51,15 +57,15 @@ function Header() {
   return (
     <nav className="bg-slate-900 fixed w-full z-20 top-0 start-0 border-default sticky">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a
-          href="https://flowbite.com/"
+        <Link
+          to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <img src={logo} className="h-10" alt="Flowbite Logo" />
-          <span className="self-center text-xl text-heading font-semibold whitespace-nowrap sr-only">
+          <img src={logo} className="h-10" alt="FilmFiesta" />
+          <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
             FilmFiesta
           </span>
-        </a>
+        </Link>
         <div className="flex items-center md:order-2">
           <button
             type="button"

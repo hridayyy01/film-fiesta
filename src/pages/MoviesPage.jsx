@@ -57,10 +57,12 @@ function MoviesGrid({ partUrl, searchTerm }) {
 
   function handlePreviousPage() {
     setPage((currentPage) => Math.max(currentPage - 1, 1));
+    window.scrollTo(0, 0);
   }
 
   function handleNextPage() {
     setPage((currentPage) => Math.min(currentPage + 1, totalPages));
+    window.scrollTo(0, 0);
   }
 
   return (
