@@ -1,16 +1,65 @@
-# React + Vite
+# FilmFiesta
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FilmFiesta is a movie browser built with React and Vite that loads films from TMDB. It includes a dark mode toggle and a watchlist saved in the browser.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Now playing, popular, top rated, and upcoming movie lists
+- Home hero banner for now playing, with backdrop, title, year, rating, a short overview, and a link to the movie
+- Search from the header
+- Pagination on movie lists
+- Movie detail page with poster, backdrop, rating, runtime, genres, overview, a trailer link, cast, and similar movies
+- Watchlist saved in the browser, with a heart toggle on cards and the detail page
+- Dark mode
+- Loading skeletons and error states
+- 404 page with a link back to Home
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite
+- React Router
+- Tailwind CSS
+- Flowbite
+- TMDB API
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Node.js is required.
+
+```bash
+npm install
+cp .env.example .env
+```
+
+Set `VITE_TMDB_API_KEY` in `.env` to a key from [TMDB API settings](https://www.themoviedb.org/settings/api). Leave `VITE_TMDB_BASE_URL` as `https://api.themoviedb.org/3`.
+
+```bash
+npm run dev
+```
+
+## Scripts
+
+| Script | Command | Purpose |
+| --- | --- | --- |
+| dev | `npm run dev` | Start the Vite development server |
+| build | `npm run build` | Build the production bundle |
+| preview | `npm run preview` | Preview the production build locally |
+| lint | `npm run lint` | Run ESLint |
+
+## Routes
+
+| Path | Page |
+| --- | --- |
+| `/` | Now playing, including the hero banner |
+| `/popular` | Popular movies |
+| `/top_rated` | Top rated movies |
+| `/upcoming` | Upcoming movies |
+| `/search` | Search results for the `q` query |
+| `/movies/:id` | Movie detail |
+| `/watchlist` | Saved movies |
+| Any other path | 404 page |
+
+## Local storage
+
+The watchlist is stored under `filmfiesta-watchlist`, and the theme is stored under `darkMode`. Both stay in `localStorage` in the browser. `.env` is gitignored, so the TMDB API key must not be committed.
