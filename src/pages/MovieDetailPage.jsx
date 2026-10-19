@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { MovieCard, Skeletons } from "../components";
+import { MovieCard, Skeletons, WatchlistButton } from "../components";
 import { useFetch } from "../hooks";
 
 function MovieDetailPage() {
@@ -117,16 +117,19 @@ function MovieDetailPage() {
             <p className="max-w-3xl text-base leading-7 text-slate-100">
               {movie.overview || "No overview is available for this movie yet."}
             </p>
-            {trailer && (
-              <a
-                href={`https://www.youtube.com/watch?v=${trailer.key}`}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex rounded-base bg-primary-800 px-4 py-2 text-sm font-medium text-white hover:bg-primary-950"
-              >
-                Watch trailer
-              </a>
-            )}
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <WatchlistButton movie={movie} showLabel />
+              {trailer && (
+                <a
+                  href={`https://www.youtube.com/watch?v=${trailer.key}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex rounded-base bg-primary-800 px-4 py-2 text-sm font-medium text-white hover:bg-primary-950"
+                >
+                  Watch trailer
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </section>

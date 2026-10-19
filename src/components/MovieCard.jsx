@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import WatchlistButton from "./WatchlistButton";
 
 function MovieCard({ movie }) {
   const posterURL = movie.poster_path
@@ -10,7 +11,8 @@ function MovieCard({ movie }) {
       : movie.overview || "No overview is available for this movie yet.";
 
   return (
-    <div className="dark:bg-slate-900 max-w-sm shadow-2xl shadow-primary-800/75 rounded-base shadow-xs m-4 mx-auto hover:scale-[1.02] ease-in-out duration-300 flex flex-col">
+    <div className="relative dark:bg-slate-900 max-w-sm shadow-2xl shadow-primary-800/75 rounded-base shadow-xs m-4 mx-auto hover:scale-[1.02] ease-in-out duration-300 flex flex-col">
+      <WatchlistButton movie={movie} />
       <Link to={`/movies/${movie.id}`}>
         <img
           className="rounded-base aspect-[2/3] object-cover w-full"

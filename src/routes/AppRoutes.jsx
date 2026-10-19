@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { MovieDetailPage, MoviesPage, PageNotFound } from "../pages";
+import { MovieDetailPage, MoviesPage, PageNotFound, WatchlistPage } from "../pages";
 
 function AppRoutes() {
   return (
@@ -23,6 +23,7 @@ function AppRoutes() {
       />
       <Route path="/search" element={<MoviesPage key="search" />} />
       <Route path="/movies/:id" element={<MovieDetailPage />} />
+      <Route path="/watchlist" element={<WatchlistPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

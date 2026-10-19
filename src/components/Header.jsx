@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { useWatchlist } from "../hooks";
 
 function Header() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ function Header() {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
   const [searchTerm, setSearchTerm] = useState(query);
+  const { movies: watchlist } = useWatchlist();
 
   const [darkMode,setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
   const handleDarkModeToggle = () => setDarkMode(!darkMode);
@@ -266,6 +268,17 @@ function Header() {
                 className={({ isActive }) => isActive ? activeMenuItemClasses : inActiveMenuItemClasses}
               >
                 Upcoming
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/watchlist"
+                className={({ isActive }) => isActive ? activeMenuItemClasses : inActiveMenuItemClasses}
+              >
+                Watchlist
+                <span className="ms-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary-800 px-1.5 text-xs font-semibold text-white">
+                  {watchlist.length}
+                </span>
               </NavLink>
             </li>
           </ul>
