@@ -59,14 +59,8 @@ function Header() {
   return (
     <nav className="bg-slate-900 fixed w-full z-20 top-0 start-0 border-default sticky">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link
-          to="/"
-          className="flex items-center space-x-3 rtl:space-x-reverse"
-        >
+        <Link to="/" className="flex items-center">
           <img src={logo} className="h-10" alt="FilmFiesta" />
-          <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
-            FilmFiesta
-          </span>
         </Link>
         <div className="flex items-center md:order-2">
           <button

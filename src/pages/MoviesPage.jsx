@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { MovieCard, Skeletons } from "../components";
+import { HeroBanner, MovieCard, Skeletons } from "../components";
 import { useFetch } from "../hooks";
 
 function createSkeletons(nums = 3) {
@@ -65,8 +65,16 @@ function MoviesGrid({ partUrl, searchTerm }) {
     window.scrollTo(0, 0);
   }
 
+  const showHero = partUrl === "now_playing";
+
   return (
     <div className="container">
+      {showHero && (
+        <HeroBanner
+          movies={movies}
+          isLoading={hasConfig && (isLoading || (!data && !error))}
+        />
+      )}
       <div className="flex flex-col gap-3 py-4 text-center">
         <h1 className="text-3xl font-bold capitalize text-heading dark:text-white">
           {heading}
